@@ -30,4 +30,6 @@ Route::middleware(['auth'])->prefix('admin')->namespace('Backend')->name('admin.
 
 	Route::get('/setting', 'SettingController@index')->name('setting.index');
 	Route::post('/setting/store', 'SettingController@store')->name('setting.store');
+	Route::post('/setting/setWebhook', 'SettingController@setWebhook')->name('setting.setWebhook');
+	Route::post('/setting/getWebhookInfo', 'SettingController@getWebhookInfo')->name('setting.getWebhookInfo');
 });
