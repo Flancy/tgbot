@@ -18,3 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Запрет на регистрацию
+Route::match(['post', 'get'], 'register', function() {
+	Auth::logout();
+	return redirect('/');
+})->name('register');
+
+Route::middleware(['auth'])->prefix('admin')->namespace('Backend')->name('admin.')->group(function (){
+	Route::get('/', 'DashboardController@index')->name('index');
+
+	Route::get('/setting', 'SettingController@index')->name('setting.index');
+	Route::post('/setting/store', 'SettingController@store')->name('setting.store');
+});
