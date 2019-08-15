@@ -28,10 +28,14 @@ Route::match(['post', 'get'], 'register', function() {
 Route::middleware(['auth'])->prefix('admin')->namespace('Backend')->name('admin.')->group(function () {
 	Route::get('/', 'DashboardController@index')->name('index');
 
+	//Настройки
 	Route::get('/setting', 'SettingController@index')->name('setting.index');
 	Route::post('/setting/store', 'SettingController@store')->name('setting.store');
 	Route::post('/setting/setWebhook', 'SettingController@setWebhook')->name('setting.setWebhook');
 	Route::post('/setting/getWebhookInfo', 'SettingController@getWebhookInfo')->name('setting.getWebhookInfo');
+
+	//Пользователи Telegram
+	Route::get('/bot_users', 'BotUsersController@index')->name('bot_users.index');
 });
 
 //Telegram

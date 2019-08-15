@@ -35,6 +35,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a href="{{ route('admin.index') }}" class="nav-link">Панель состояния</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.bot_users.index') }}" class="nav-link">Пользователи телеграм</a></li>
                         <li class="nav-item"><a href="{{ route('admin.setting.index') }}" class="nav-link">Настройки</a></li>
                     </ul>
 
