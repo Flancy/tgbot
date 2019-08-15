@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Dashboard\Setting;
+use Telegram\Bot\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,11 +27,11 @@ class SettingController extends Controller
     }
 
     public function setWebhook(Request $request) {
-        $result = $this->sendTelegramData('setwebhook', [
-            'query' => ['url', $request->url . '/' . env('TELEGRAM_BOT_TOKEN')]
-        ]);
+        $telegram = new Api(\Telegram::getAccessToken());
 
-        return redirect()->route('admin.setting.index')->with('status', $result);
+        $response = $telegram->setWebhook(['url' => $request->url . '/' . \Telegram::getAccessToken()]);
+
+        return redirect()->route('admin.setting.index')->with(['status' => $response]);
     }
 
     public function getWebhookInfo(Request $request) {
@@ -40,7 +41,9 @@ class SettingController extends Controller
     }
 
     public function sendTelegramData($route = '', $params = [], $method = 'POST') {
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.telegram.com/bot' . env('TELEGRAM_BOT_TOKEN') . '/']);
+        $client = new \GuzzleHttp\Client([
+            'base_uri' => 'https://api.telegram.org/bot' . \Telegram::getAccessToken() . '/'
+        ]);
         $result = $client->request($method, $route, $params);
 
         return (string) $result->getBody();

@@ -6,6 +6,7 @@
 	@if (Session::has('status'))
 		<div class="alert alert-info">
 			<span>{{ Session::get('status') }}</span>
+			<span>{{ Session::get('url') }}</span>
 		</div>
 	@endif
 	<form action="{{ route('admin.setting.store') }}" method="post">

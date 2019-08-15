@@ -152,6 +152,7 @@ return [
          */
 
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,6 +213,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
