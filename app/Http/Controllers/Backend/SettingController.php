@@ -27,17 +27,23 @@ class SettingController extends Controller
     }
 
     public function setWebhook(Request $request) {
-        $telegram = new Api(\Telegram::getAccessToken());
+        $result = $this->sendTelegramData('setwebhook', [
+            'query' => ['url' => $request->url . '/' . \Telegram::getAccessToken() . '/webhook']
+        ]);
 
-        $response = $telegram->setWebhook(['url' => $request->url . '/' . \Telegram::getAccessToken()]);
-
-        return redirect()->route('admin.setting.index')->with(['status' => $response]);
+        return redirect()->route('admin.setting.index')->with(['status' => $result]);
     }
 
     public function getWebhookInfo(Request $request) {
-        $result = $this->sendTelegramData('getWebhookInfo');
+        //$result = $this->sendTelegramData('getWebhookInfo');
 
-        return redirect()->route('admin.setting.index')->with('status', $result);
+        $response = \Telegram::getMe();
+
+        $botId = $response->getId();
+        $firstName = $response->getFirstName();
+        $username = $response->getUsername();
+
+        return redirect()->route('admin.setting.index')->with('status', $botId);
     }
 
     public function sendTelegramData($route = '', $params = [], $method = 'POST') {

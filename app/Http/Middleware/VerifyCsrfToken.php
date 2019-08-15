@@ -12,6 +12,14 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        '749541139:*'
+        '978302857:AAG4QFuiXnwdquiUv-1sSM__eeqCcqLluDo/webhook'
     ];
+
+    /*
+    public function __construct(\Illuminate\Foundation\Application $app, \Illuminate\Contracts\Encryption\Encrypter $encrypter) {
+        $this->app = $app;
+        $this->encrypter = $encrypter;
+        $this->except[] = \Telegram::getAccessToken(); 
+    }
+    */
 }

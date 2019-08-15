@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +35,8 @@ Route::middleware(['auth'])->prefix('admin')->namespace('Backend')->name('admin.
 });
 
 //Telegram
-Route::post(Telegram::getAccessToken(), function () {
-	Telegram::commandHandler(true);
+Route::post('/' . \Telegram::getAccessToken() . '/webhook', function (Request $request) {       
+    $update = Telegram::commandsHandler(true);
+    return 'ok';
 });
+Route::get('get-me', 'Backend\SettingController@getMe');

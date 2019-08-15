@@ -24,10 +24,7 @@ class TestCommand extends Command
     {
         $commands = $this->telegram->getCommands();
 
-        $text = '';
-        foreach ($commands as $name => $handler) {
-            $text .= sprintf('/%s - %s'.PHP_EOL, $name, $handler->getDescription());
-        }
+        $text = 'Test Command';
 
         $this->replyWithMessage(compact('text'));
     }
